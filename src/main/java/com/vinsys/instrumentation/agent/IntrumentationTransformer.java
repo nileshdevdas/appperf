@@ -31,7 +31,6 @@ public class IntrumentationTransformer implements ClassFileTransformer {
 	public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
 			ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
 		byte[] byteCode = classfileBuffer;
-
 		String finalTargetClassName = this.targetClassName.replaceAll("\\.", "/"); // replace . with /
 		if (!className.equals(finalTargetClassName)) {
 			return byteCode;
@@ -44,16 +43,14 @@ public class IntrumentationTransformer implements ClassFileTransformer {
 			CtMethod m = cc.getDeclaredMethod(METHOD);
 			m.addLocalVariable("startTime", CtClass.longType);
 			m.insertBefore("startTime = System.currentTimeMillis();");
-
 			StringBuilder endBlock = new StringBuilder();
-
 			m.addLocalVariable("endTime", CtClass.longType);
 			m.addLocalVariable("opTime", CtClass.longType);
 			endBlock.append("endTime = System.currentTimeMillis();");
 			endBlock.append("opTime = (endTime-startTime)/1000;");
 
-			endBlock.append(
-					"System.out.println(\"[Application] printReport operation completed in:\" + opTime + \" seconds!\");");
+			endBlock.append("System.out.println(\"[Application] " + m.getMethodInfo().getName()
+					+ " operation completed in:\" + opTime + \" seconds!\");");
 
 			m.insertAfter(endBlock.toString());
 
