@@ -1,0 +1,4 @@
+Agent-Class: com.vinsys.instrumentation.agent.InstrumentationAgent
+Premain-Class: com.vinsys.instrumentation.agent.InstrumentationAgent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
