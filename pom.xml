@@ -29,7 +29,7 @@
 	<properties>
 		<assertj.version>3.6.1</assertj.version>
 		<javaassist.version>3.21.0-GA</javaassist.version>
-		<esapi.version>2.1.0.1</esapi.version>
+		<esapi.version>2.3.0.0</esapi.version>
 		<sun.tools.version>1.8.0</sun.tools.version>
 	</properties>
 	<dependencies>
